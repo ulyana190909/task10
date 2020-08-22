@@ -12,40 +12,46 @@ public class Conditioner {
     }
 
     public void setMaxTemperature(int maxTemperature) {
-        this.maxTemperature = 32;
+        this.maxTemperature = maxTemperature;
     }
 
     public int getMinTemperature() {
         return minTemperature;
     }
 
-    public void setMinTemperature(int MinTemperature) {
-        this.minTemperature = 5;
+    public void setMinTemperature(int minTemperature) {
+        this.minTemperature = minTemperature;
     }
 
-    public void setIncreaseCurrentTemperature(int currentTemperature) {
-        int increaseCurrent = currentTemperature + 1;
-        {
-            if (increaseCurrent < maxTemperature) {
-                return;
-            }
-            if (increaseCurrent > minTemperature){
-                return;
-            }
-            }
-            this.currentTemperature = increaseCurrent;
-        }
+    public void getCurrentTemperature() {
+        this.currentTemperature = currentTemperature;
+    }
 
-    public void decreaseCurrentTemperature(int currentTemperature) {
-        int decreaseCurrent = currentTemperature - 1;
-        {
-            if (decreaseCurrent < maxTemperature) {
-                return;
-            }
-            if (decreaseCurrent > minTemperature){
-                return;
-            }
+    public void setCurrentTemperature(int currentTemperature) {
+        if (currentTemperature > maxTemperature) {
+            return;
         }
-        this.currentTemperature = decreaseCurrent;
+        if (currentTemperature < minTemperature) {
+            return;
+        }
+        this.currentTemperature = currentTemperature;
+    }
+
+    public int setIncreaseCurrentTemperature() {
+        if (currentTemperature == maxTemperature) {
+            return maxTemperature;
+        }
+        this.currentTemperature = currentTemperature + 1;
+        return currentTemperature;
+    }
+
+    public int decreaseCurrentTemperature() {
+        if (currentTemperature == minTemperature) {
+            return minTemperature;
+        }
+        this.currentTemperature = currentTemperature - 1;
+        return currentTemperature;
     }
 }
+
+
