@@ -1,9 +1,12 @@
 package ru.netology;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Conditioner;
 
 import javax.xml.stream.FactoryConfigurationError;
+
+import java.util.concurrent.Callable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -24,8 +27,7 @@ class ConditionerTest {
 
         int expected = 6;
         int actual = conditioner.setIncreaseCurrentTemperature();
-
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
     @Test
     public void increaseTest2Temperature() {
@@ -113,3 +115,4 @@ class ConditionerTest {
         assertEquals(expected,actual);
     }
 }
+

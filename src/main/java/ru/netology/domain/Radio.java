@@ -7,6 +7,7 @@ public class Radio {
     private int lastRadioStation;
     private int next;
     private int prev;
+    private int numberPressStation;
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
@@ -56,5 +57,44 @@ public class Radio {
         this.prev = prev;
     }
 
-    public int pressButtonNext;
+    public int getNumberPressStation() {
+        return numberPressStation;
+    }
+
+    public void setNumberPressStation(int numberPressStation) {
+        this.numberPressStation = numberPressStation;
+    }
+
+    //изменение текущей станции в пределах первой - последней станции
+    public int numberCurrentStation () {
+        if (currentRadioStation >= firstRadioStation) {
+            return currentRadioStation;
+        }
+        if (currentRadioStation <= lastRadioStation) {
+            return currentRadioStation;
+        }
+        this.currentRadioStation = currentRadioStation;
+        return currentRadioStation;
+    }
+
+    //нажатие кнопки вперед
+    public int pressButtonNext () {
+        if (lastRadioStation < currentRadioStation) {
+            return firstRadioStation;
+        }
+        this.currentRadioStation = currentRadioStation;
+        return currentRadioStation;
+    }
+
+    //нажатие кнопки назад
+    public int pressButtonPrev () {
+        if(firstRadioStation > currentRadioStation) {
+            return lastRadioStation;
+        }
+        this.currentRadioStation = currentRadioStation;
+        return currentRadioStation;
+    }
+
+    //выбор на пульте (пока в работе)
 }
+

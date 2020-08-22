@@ -23,8 +23,8 @@ public class Conditioner {
         this.minTemperature = minTemperature;
     }
 
-    public void getCurrentTemperature() {
-        this.currentTemperature = currentTemperature;
+    public int getCurrentTemperature() {
+        return currentTemperature;
     }
 
     public void setCurrentTemperature(int currentTemperature) {
