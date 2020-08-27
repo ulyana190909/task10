@@ -1,13 +1,21 @@
 package ru.netology.domain;
 
 public class Radio {
-    private int currentRadioStation;
-    private int soundVolume;
-    private int firstRadioStation;
-    private int lastRadioStation;
-    private int next;
-    private int prev;
-    private int numberPressStation;
+    private int currentRadioStation;  //текущая радиостанция
+    private int firstRadioStation; //первая радиостанция
+    private int lastRadioStation; // последняя радиостанция
+    private int pressButton; //выбор радиостанции
+    private int soundVolume;  //громкость звука
+    private int minimumVolume; //минимальный звук
+    private int maximumVolume; //максимальный звук
+
+    public int getPressButton() {
+        return pressButton;
+    }
+
+    public void setPressButton(int pressButton) {
+        this.pressButton = pressButton;
+    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
@@ -41,60 +49,91 @@ public class Radio {
         this.lastRadioStation = lastRadioStation;
     }
 
-    public int getNext() {
-        return next;
+    public int getMinimumVolume() {
+        return minimumVolume;
     }
 
-    public void setNext(int next) {
-        this.next = next;
+    public void setMinimumVolume(int minimumVolume) {
+        this.minimumVolume = minimumVolume;
     }
 
-    public int getPrev() {
-        return prev;
+    public int getMaximumVolume() {
+        return maximumVolume;
     }
 
-    public void setPrev(int prev) {
-        this.prev = prev;
+    public void setMaximumVolume(int maximumVolume) {
+        this.maximumVolume = maximumVolume;
     }
 
-    public int getNumberPressStation() {
-        return numberPressStation;
-    }
 
-    public void setNumberPressStation(int numberPressStation) {
-        this.numberPressStation = numberPressStation;
-    }
+//изменение текущей станции в пределах первой - последней радиостанции
 
-    //изменение текущей станции в пределах первой - последней станции
-    public int numberCurrentStation () {
-        if (currentRadioStation >= firstRadioStation) {
-            return currentRadioStation;
+    public int numberCurrentStation() {
+        if (currentRadioStation < firstRadioStation) {
+            return firstRadioStation;
         }
-        if (currentRadioStation <= lastRadioStation) {
-            return currentRadioStation;
+        if (currentRadioStation >= lastRadioStation) {
+            return lastRadioStation;
         }
-        this.currentRadioStation = currentRadioStation;
+        this.currentRadioStation = currentRadioStation + 1;
         return currentRadioStation;
     }
 
     //нажатие кнопки вперед
-    public int pressButtonNext () {
-        if (lastRadioStation < currentRadioStation) {
+    public int pressButtonNext() {
+        if (currentRadioStation > lastRadioStation) {
             return firstRadioStation;
         }
-        this.currentRadioStation = currentRadioStation;
+        this.currentRadioStation = firstRadioStation;
         return currentRadioStation;
     }
 
     //нажатие кнопки назад
-    public int pressButtonPrev () {
-        if(firstRadioStation > currentRadioStation) {
+    public int pressButtonPrev() {
+        if (currentRadioStation < firstRadioStation) {
             return lastRadioStation;
         }
-        this.currentRadioStation = currentRadioStation;
+        this.currentRadioStation = lastRadioStation;
         return currentRadioStation;
     }
 
-    //выбор на пульте (пока в работе)
+    //выбор на пульте
+    public int pressButton() {
+        if (firstRadioStation < pressButton) {
+            return pressButton;
+        }
+        if (pressButton <= lastRadioStation) {
+            return pressButton;
+        }
+        this.pressButton = pressButton + 0;
+        return pressButton;
+    }
+
+    public int soundVolume() {
+        if (soundVolume < minimumVolume) {
+            return minimumVolume;
+        }
+        if (soundVolume >= maximumVolume) {
+            return maximumVolume;
+        }
+        this.soundVolume = soundVolume + 1;
+        return soundVolume;
+    }
+
+    public int maximumSoundVolume() {
+        if (soundVolume == maximumVolume) {
+            return maximumVolume;
+        }
+        this.soundVolume = soundVolume + 1;
+        return soundVolume;
+    }
+
+    public int minimumSoundVolume() {
+        if (soundVolume == minimumVolume) {
+            return minimumVolume;
+        }
+        return soundVolume = soundVolume - 1;
+    }
 }
+
 
