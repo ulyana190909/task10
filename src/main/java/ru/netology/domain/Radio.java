@@ -69,11 +69,11 @@ public class Radio {
 //изменение текущей станции в пределах первой - последней радиостанции
 
     public int numberCurrentStation() {
-        if (currentRadioStation < firstRadioStation) {
-            return firstRadioStation;
+        if (currentRadioStation <= firstRadioStation) {
+            return currentRadioStation +1;
         }
         if (currentRadioStation >= lastRadioStation) {
-            return lastRadioStation;
+            return currentRadioStation = lastRadioStation;
         }
         this.currentRadioStation = currentRadioStation + 1;
         return currentRadioStation;
@@ -81,31 +81,34 @@ public class Radio {
 
     //нажатие кнопки вперед
     public int pressButtonNext() {
-        if (currentRadioStation > lastRadioStation) {
-            return firstRadioStation;
+        if (currentRadioStation >= lastRadioStation) {
+            return currentRadioStation = firstRadioStation;
         }
-        this.currentRadioStation = firstRadioStation;
+        if (currentRadioStation >= firstRadioStation) {
+            return currentRadioStation +1;
+        }
+        this.currentRadioStation = currentRadioStation +1;
         return currentRadioStation;
     }
 
     //нажатие кнопки назад
-    public int pressButtonPrev() {
-        if (currentRadioStation < firstRadioStation) {
-            return lastRadioStation;
+    public void pressButtonPrev() {
+        if (currentRadioStation <= firstRadioStation) {
+            currentRadioStation = lastRadioStation;
+            return;
         }
-        this.currentRadioStation = lastRadioStation;
-        return currentRadioStation;
+        currentRadioStation = currentRadioStation - 1;
     }
 
     //выбор на пульте
     public int pressButton() {
-        if (firstRadioStation < pressButton) {
+        if (firstRadioStation <= pressButton) {
             return pressButton;
         }
         if (pressButton <= lastRadioStation) {
             return pressButton;
         }
-        this.pressButton = pressButton + 0;
+        this.pressButton = pressButton;
         return pressButton;
     }
 
@@ -132,7 +135,8 @@ public class Radio {
         if (soundVolume == minimumVolume) {
             return minimumVolume;
         }
-        return soundVolume = soundVolume - 1;
+        this.soundVolume = soundVolume -1;
+        return soundVolume;
     }
 }
 
