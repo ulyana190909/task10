@@ -1,107 +1,93 @@
 package ru.netology;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Radio;
+
+import javax.xml.stream.FactoryConfigurationError;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
+    Radio radio = new Radio();
 
-    @Test //Номер текущей радиостанции изменяется в пределах от 0 до 9
-    public void changingCurrentRadioStation1() {
-        Radio radio = new Radio();
+    @BeforeEach
+    public void setUp() {
         int firstStation = 0;
         radio.setFirstRadioStation(firstStation);
 
         int lastStation = 9;
         radio.setLastRadioStation(lastStation);
 
+        int minimumVolume = 0;
+        radio.setMinimumVolume(minimumVolume);
+
+        int maximumVolume = 10;
+        radio.setMaximumVolume(maximumVolume);
+    }
+
+    @Test  //Номер текущей радиостанции изменяется в пределах от 0 до 9
+    public void changingCurrentRadioStation1() {
         int currentStation = 4;
         radio.setCurrentRadioStation(currentStation);
 
         int expected = 5;
-        int actual = radio.numberCurrentStation();
+        radio.numberCurrentStation();
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 
     @Test //Номер текущей радиостанции изменяется в пределах от 0 до 9
     public void changingCurrentRadioStation2() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 9;
         radio.setCurrentRadioStation(currentStation);
 
         int expected = 9;
-        int actual = radio.numberCurrentStation();
+        radio.numberCurrentStation();
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
+
     @Test //Номер текущей радиостанции изменяется в пределах от 0 до 9
     public void changingCurrentRadioStation3() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 0;
         radio.setCurrentRadioStation(currentStation);
 
         int expected = 1;
-        int actual = radio.numberCurrentStation();
+        radio.numberCurrentStation();
+        int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
 
-    @Test //Если текущая радиостанция - 9 и клиент нажал на кнопку next (следующая) на пульте, то текущей должна стать 0-ая
+    @Test
+    //Если текущая радиостанция - 9 и клиент нажал на кнопку next (следующая) на пульте, то текущей должна стать 0-ая
     public void nextCurrentStation1() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 9;
         radio.setCurrentRadioStation(currentStation);
 
         int expected = 0;
-        int actual = radio.pressButtonNext();
+        radio.pressButtonNext();
+        int actual = radio.getCurrentRadioStation();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Если текущая радиостанция - 5 и клиент нажал на кнопку next (следующая) на пульте, то текущей должна стать 6-ая
+    @Test
+    //Если текущая радиостанция - 5 и клиент нажал на кнопку next (следующая) на пульте, то текущей должна стать 6-ая
     public void nextCurrentStation2() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 5;
         radio.setCurrentRadioStation(currentStation);
 
         int expected = 6;
-        int actual = radio.pressButtonNext();
+        radio.pressButtonNext();
+        int actual = radio.getCurrentRadioStation();
 
         assertEquals(expected, actual);
     }
 
-    @Test  //Если текущая радиостанция - 0 и клиент нажал на кнопку prev (предыдущая) на пульте, то текущей должна стать 9-ая
+    @Test
+    //Если текущая радиостанция - 0 и клиент нажал на кнопку prev (предыдущая) на пульте, то текущей должна стать 9-ая
     public void prevCurrentStation1() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 0;
         radio.setCurrentRadioStation(currentStation);
 
@@ -114,13 +100,6 @@ public class RadioTest {
     @Test
     //Если текущая радиостанция - 5 и клиент нажал на кнопку prev (предыдущая) на пульте, то текущей должна стать 4-ая
     public void prevCurrentStation2() {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
         int currentStation = 5;
         radio.setCurrentRadioStation(currentStation);
 
@@ -132,108 +111,135 @@ public class RadioTest {
     }
 
     @Test //Клиент должен иметь возможность выставлять номер радиостанции с цифрового пульта (вводя числа 0 - 9)
-    public void pressButtonRadioStation1 () {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
+    public void pressButtonRadioStation1() {
         int pressButton = 5;
         radio.setPressButton(pressButton);
 
         int expected = 5;
-        int actual = radio.pressButton();
+        radio.pressButton();
+        int actual = radio.getPressButton();
+        assertEquals(expected, actual);
+    }
+
+    @Test //Клиент должен иметь возможность выставлять номер радиостанции с цифрового пульта (вводя числа 0 - 9)
+    public void pressButtonRadioStation2() {
+        int pressButton = 9;
+        radio.setPressButton(pressButton);
+
+        int expected = 9;
+        radio.pressButton();
+        int actual = radio.getPressButton();
 
         assertEquals(expected, actual);
     }
 
     @Test //Клиент должен иметь возможность выставлять номер радиостанции с цифрового пульта (вводя числа 0 - 9)
-    public void pressButtonRadioStation2 () {
-        Radio radio = new Radio();
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
+    public void pressButtonRadioStation3() {
         int pressButton = 0;
         radio.setPressButton(pressButton);
 
         int expected = 0;
-        int actual = radio.pressButton();
+        radio.pressButton();
+        int actual = radio.getPressButton();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Клиент должен иметь возможность увеличивать и уменьшать уровень громкости звука (в пределах от 0 до 10)
-    public void changingVolume() {
-        Radio radio = new Radio();
-        int minimumVolume = 0;
-        radio.setMinimumVolume(minimumVolume);
-
-        int maximumVolume = 10;
-        radio.setMaximumVolume(maximumVolume);
-
+    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 10)
+    public void changingVolumePlus1() {
         int soundVolume = 5;
         radio.setSoundVolume(soundVolume);
 
         int expected = 6;
-        int actual = radio.soundVolume();
+        radio.setSoundVolumePlus();
+        int actual = radio.getSoundVolume();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Если уровень громкости звука достиг максимального значения, то дальнейшее нажатие на + не должно ни к чему приводить
-    public void maxVolume() {
-        Radio radio = new Radio();
-        int minimumVolume = 0;
-        radio.setMinimumVolume(minimumVolume);
-
-        int maximumVolume = 10;
-        radio.setMaximumVolume(maximumVolume);
-
+    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 10)
+    public void changingVolumePlus2() {
         int soundVolume = 10;
         radio.setSoundVolume(soundVolume);
 
         int expected = 10;
-        int actual = radio.maximumSoundVolume();
+        radio.setSoundVolumePlus();
+        int actual = radio.getSoundVolume();
 
         assertEquals(expected, actual);
     }
-    @Test //Если уровень громкости звука достиг минимального значения, то дальнейшее нажатие на - не должно ни к чему приводить
-    public void minVolume1() {
-        Radio radio = new Radio();
-        int minimumVolume = 0;
-        radio.setMinimumVolume(minimumVolume);
 
-        int maximumVolume = 10;
-        radio.setMaximumVolume(maximumVolume);
-
-        int soundVolume = 0;
-        radio.setSoundVolume(soundVolume);
-
-        int expected = 0;
-        int actual = radio.minimumSoundVolume();
-
-        assertEquals(expected, actual);
-    }
-    @Test //Если уровень громкости звука достиг минимального значения, то дальнейшее нажатие на - не должно ни к чему приводить
-    public void minVolume2() {
-        Radio radio = new Radio();
-        int minimumVolume = 0;
-        radio.setMinimumVolume(minimumVolume);
-
-        int maximumVolume = 10;
-        radio.setMaximumVolume(maximumVolume);
-
+    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 10)
+    public void changingVolumeMinus1() {
         int soundVolume = 5;
         radio.setSoundVolume(soundVolume);
 
         int expected = 4;
-        int actual = radio.minimumSoundVolume();
+        radio.setSoundVolumeMinus();
+        int actual = radio.getSoundVolume();
 
+        assertEquals(expected, actual);
+    }
+
+    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 10)
+    public void changingVolumeMinus2() {
+        int soundVolume = 0;
+        radio.setSoundVolume(soundVolume);
+
+        int expected = 0;
+        radio.setSoundVolumeMinus();
+        int actual = radio.getSoundVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    //Если уровень громкости звука достиг максимального значения, то дальнейшее нажатие на + не должно ни к чему приводить
+    public void maxVolume() {
+        int soundVolume = 10;
+        radio.setSoundVolume(soundVolume);
+
+        int expected = 10;
+        radio.maximumSoundVolume();
+        int actual = radio.getSoundVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    //Если уровень громкости звука достиг максимального значения, то дальнейшее нажатие на + не должно ни к чему приводить
+    public void maxVolume2() {
+        int soundVolume = 7;
+        radio.setSoundVolume(soundVolume);
+
+        int expected = 8;
+        radio.maximumSoundVolume();
+        int actual = radio.getSoundVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    //Если уровень громкости звука достиг минимального значения, то дальнейшее нажатие на - не должно ни к чему приводить
+    public void minVolume1() {
+        int soundVolume = 0;
+        radio.setSoundVolume(soundVolume);
+
+        int expected = 0;
+        radio.minimumSoundVolume();
+        int actual = radio.getSoundVolume();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    //Если уровень громкости звука достиг минимального значения, то дальнейшее нажатие на - не должно ни к чему приводить
+    public void minVolume2() {
+        int soundVolume = 5;
+        radio.setSoundVolume(soundVolume);
+
+        int expected = 4;
+        radio.minimumSoundVolume();
+        int actual = radio.getSoundVolume();
         assertEquals(expected, actual);
     }
 

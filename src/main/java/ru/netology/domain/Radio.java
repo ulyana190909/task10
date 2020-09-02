@@ -1,5 +1,8 @@
 package ru.netology.domain;
 
+import javax.print.DocFlavor;
+import java.util.concurrent.Callable;
+
 public class Radio {
     private int currentRadioStation;  //текущая радиостанция
     private int firstRadioStation; //первая радиостанция
@@ -66,29 +69,22 @@ public class Radio {
     }
 
 
-//изменение текущей станции в пределах первой - последней радиостанции
-
-    public int numberCurrentStation() {
-        if (currentRadioStation <= firstRadioStation) {
-            return currentRadioStation +1;
-        }
+    //изменение текущей станции в пределах первой - последней радиостанции
+    public void numberCurrentStation() {
         if (currentRadioStation >= lastRadioStation) {
-            return currentRadioStation = lastRadioStation;
+            currentRadioStation = lastRadioStation;
+            return;
         }
-        this.currentRadioStation = currentRadioStation + 1;
-        return currentRadioStation;
+        currentRadioStation = currentRadioStation + 1;
     }
 
     //нажатие кнопки вперед
-    public int pressButtonNext() {
+    public void pressButtonNext() {
         if (currentRadioStation >= lastRadioStation) {
-            return currentRadioStation = firstRadioStation;
+            currentRadioStation = firstRadioStation;
+            return;
         }
-        if (currentRadioStation >= firstRadioStation) {
-            return currentRadioStation +1;
-        }
-        this.currentRadioStation = currentRadioStation +1;
-        return currentRadioStation;
+        currentRadioStation = currentRadioStation + 1;
     }
 
     //нажатие кнопки назад
@@ -101,42 +97,53 @@ public class Radio {
     }
 
     //выбор на пульте
-    public int pressButton() {
-        if (firstRadioStation <= pressButton) {
-            return pressButton;
+    public void pressButton() {
+        if (pressButton <= firstRadioStation) {
+            pressButton = firstRadioStation;
+            return;
         }
-        if (pressButton <= lastRadioStation) {
-            return pressButton;
+        if (pressButton >= lastRadioStation) {
+            pressButton = lastRadioStation;
+            return;
         }
-        this.pressButton = pressButton;
-        return pressButton;
+        pressButton = pressButton + 0;
+
     }
 
-    public int soundVolume() {
-        if (soundVolume < minimumVolume) {
-            return minimumVolume;
-        }
+    //увеличение уровня звука
+    public void setSoundVolumePlus() {
         if (soundVolume >= maximumVolume) {
-            return maximumVolume;
+            soundVolume = maximumVolume;
+            return;
         }
-        this.soundVolume = soundVolume + 1;
-        return soundVolume;
+        soundVolume = soundVolume + 1;
     }
 
-    public int maximumSoundVolume() {
-        if (soundVolume == maximumVolume) {
-            return maximumVolume;
+    //уменьшение уровня звука
+    public void setSoundVolumeMinus() {
+        if (soundVolume <= minimumVolume) {
+            soundVolume = minimumVolume;
+            return;
         }
-        this.soundVolume = soundVolume + 1;
-        return soundVolume;
+        soundVolume = soundVolume - 1;
     }
 
-    public int minimumSoundVolume() {
-        if (soundVolume == minimumVolume) {
-            return minimumVolume;
+    //максимальный уровень громкости
+    public void maximumSoundVolume() {
+        if (soundVolume >= maximumVolume) {
+            soundVolume = maximumVolume;
+            return;
         }
-        this.soundVolume = soundVolume -1;
-        return soundVolume;
+        soundVolume = soundVolume + 1;
+    }
+
+    //минимальный уровень громкости
+    public void minimumSoundVolume() {
+        if (soundVolume <= minimumVolume) {
+            soundVolume = minimumVolume;
+            return;
+        }
+        soundVolume = soundVolume - 1;
     }
 }
 
