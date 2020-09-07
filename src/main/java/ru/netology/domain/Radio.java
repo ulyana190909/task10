@@ -5,19 +5,21 @@ import java.util.concurrent.Callable;
 
 public class Radio {
     private int currentRadioStation;  //текущая радиостанция
-    private int firstRadioStation; //первая радиостанция
-    private int lastRadioStation; // последняя радиостанция
+    private int firstRadioStation = 0; //первая радиостанция
+    private int lastRadioStation = 9; // последняя радиостанция
     private int pressButton; //выбор радиостанции
     private int soundVolume;  //громкость звука
-    private int minimumVolume; //минимальный звук
-    private int maximumVolume; //максимальный звук
+    private int minimumVolume = 0; //минимальный звук
+    private int maximumVolume = 100; //максимальный звук
 
-    public int getPressButton() {
-        return pressButton;
-    }
-
-    public void setPressButton(int pressButton) {
+    public Radio() {
+        this.currentRadioStation = currentRadioStation;
+        this.firstRadioStation = firstRadioStation;
+        this.lastRadioStation = lastRadioStation;
         this.pressButton = pressButton;
+        this.soundVolume = soundVolume;
+        this.minimumVolume = minimumVolume;
+        this.maximumVolume = maximumVolume;
     }
 
     public int getCurrentRadioStation() {
@@ -28,15 +30,7 @@ public class Radio {
         this.currentRadioStation = currentRadioStation;
     }
 
-    public int getSoundVolume() {
-        return soundVolume;
-    }
-
-    public void setSoundVolume(int soundVolume) {
-        this.soundVolume = soundVolume;
-    }
-
-    public int getFirstRadioStation(int firstStation) {
+    public int getFirstRadioStation() {
         return firstRadioStation;
     }
 
@@ -44,12 +38,28 @@ public class Radio {
         this.firstRadioStation = firstRadioStation;
     }
 
-    public int getLastRadioStation(int lastStation) {
+    public int getLastRadioStation() {
         return lastRadioStation;
     }
 
     public void setLastRadioStation(int lastRadioStation) {
         this.lastRadioStation = lastRadioStation;
+    }
+
+    public int getPressButton() {
+        return pressButton;
+    }
+
+    public void setPressButton(int pressButton) {
+        this.pressButton = pressButton;
+    }
+
+    public int getSoundVolume() {
+        return soundVolume;
+    }
+
+    public void setSoundVolume(int soundVolume) {
+        this.soundVolume = soundVolume;
     }
 
     public int getMinimumVolume() {
@@ -67,7 +77,6 @@ public class Radio {
     public void setMaximumVolume(int maximumVolume) {
         this.maximumVolume = maximumVolume;
     }
-
 
     //изменение текущей станции в пределах первой - последней радиостанции
     public void numberCurrentStation() {

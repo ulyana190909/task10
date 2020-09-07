@@ -9,22 +9,7 @@ import javax.xml.stream.FactoryConfigurationError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
-    Radio radio = new Radio();
-
-    @BeforeEach
-    public void setUp() {
-        int firstStation = 0;
-        radio.setFirstRadioStation(firstStation);
-
-        int lastStation = 9;
-        radio.setLastRadioStation(lastStation);
-
-        int minimumVolume = 0;
-        radio.setMinimumVolume(minimumVolume);
-
-        int maximumVolume = 10;
-        radio.setMaximumVolume(maximumVolume);
-    }
+   private Radio radio = new Radio();
 
     @Test  //Номер текущей радиостанции изменяется в пределах от 0 до 9
     public void changingCurrentRadioStation1() {
@@ -145,43 +130,43 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
-    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 10)
+    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 100)
     public void changingVolumePlus1() {
-        int soundVolume = 5;
+        int soundVolume = 55;
         radio.setSoundVolume(soundVolume);
 
-        int expected = 6;
+        int expected = 56;
         radio.setSoundVolumePlus();
         int actual = radio.getSoundVolume();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 10)
+    @Test //Клиент должен иметь возможность увеличивать уровень громкости звука (в пределах от 0 до 100)
     public void changingVolumePlus2() {
-        int soundVolume = 10;
+        int soundVolume = 100;
         radio.setSoundVolume(soundVolume);
 
-        int expected = 10;
+        int expected = 100;
         radio.setSoundVolumePlus();
         int actual = radio.getSoundVolume();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 10)
+    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 100)
     public void changingVolumeMinus1() {
-        int soundVolume = 5;
+        int soundVolume = 55;
         radio.setSoundVolume(soundVolume);
 
-        int expected = 4;
+        int expected = 54;
         radio.setSoundVolumeMinus();
         int actual = radio.getSoundVolume();
 
         assertEquals(expected, actual);
     }
 
-    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 10)
+    @Test //Клиент должен иметь возможность уменьшать уровень громкости звука (в пределах от 0 до 100)
     public void changingVolumeMinus2() {
         int soundVolume = 0;
         radio.setSoundVolume(soundVolume);
@@ -196,10 +181,10 @@ public class RadioTest {
     @Test
     //Если уровень громкости звука достиг максимального значения, то дальнейшее нажатие на + не должно ни к чему приводить
     public void maxVolume() {
-        int soundVolume = 10;
+        int soundVolume = 100;
         radio.setSoundVolume(soundVolume);
 
-        int expected = 10;
+        int expected = 100;
         radio.maximumSoundVolume();
         int actual = radio.getSoundVolume();
 
