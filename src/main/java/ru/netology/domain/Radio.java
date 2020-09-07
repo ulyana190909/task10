@@ -4,7 +4,7 @@ import javax.print.DocFlavor;
 import java.util.concurrent.Callable;
 
 public class Radio {
-    private int currentRadioStation;  //текущая радиостанция
+    private int currentRadioStation;  //текущая радиостанци
     private int firstRadioStation; //первая радиостанция
     private int lastRadioStation; // последняя радиостанция
     private int pressButton; //выбор радиостанции
