@@ -13,6 +13,9 @@ public class Radio {
     private int maximumVolume = 100; //максимальный звук
 
     public Radio() {
+    }
+
+    public Radio(int currentRadioStation, int firstRadioStation, int lastRadioStation, int pressButton, int soundVolume, int minimumVolume, int maximumVolume) {
         this.currentRadioStation = currentRadioStation;
         this.firstRadioStation = firstRadioStation;
         this.lastRadioStation = lastRadioStation;
