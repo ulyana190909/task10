@@ -1,8 +1,14 @@
 package ru.netology.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.print.DocFlavor;
 import java.util.concurrent.Callable;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Radio {
     private int currentRadioStation;  //текущая радиостанция
     private int firstRadioStation = 0; //первая радиостанция
@@ -12,71 +18,6 @@ public class Radio {
     private int minimumVolume = 0; //минимальный звук
     private int maximumVolume = 100; //максимальный звук
 
-    public Radio() {
-        this.currentRadioStation = currentRadioStation;
-        this.firstRadioStation = firstRadioStation;
-        this.lastRadioStation = lastRadioStation;
-        this.pressButton = pressButton;
-        this.soundVolume = soundVolume;
-        this.minimumVolume = minimumVolume;
-        this.maximumVolume = maximumVolume;
-    }
-
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
-    }
-
-    public void setCurrentRadioStation(int currentRadioStation) {
-        this.currentRadioStation = currentRadioStation;
-    }
-
-    public int getFirstRadioStation() {
-        return firstRadioStation;
-    }
-
-    public void setFirstRadioStation(int firstRadioStation) {
-        this.firstRadioStation = firstRadioStation;
-    }
-
-    public int getLastRadioStation() {
-        return lastRadioStation;
-    }
-
-    public void setLastRadioStation(int lastRadioStation) {
-        this.lastRadioStation = lastRadioStation;
-    }
-
-    public int getPressButton() {
-        return pressButton;
-    }
-
-    public void setPressButton(int pressButton) {
-        this.pressButton = pressButton;
-    }
-
-    public int getSoundVolume() {
-        return soundVolume;
-    }
-
-    public void setSoundVolume(int soundVolume) {
-        this.soundVolume = soundVolume;
-    }
-
-    public int getMinimumVolume() {
-        return minimumVolume;
-    }
-
-    public void setMinimumVolume(int minimumVolume) {
-        this.minimumVolume = minimumVolume;
-    }
-
-    public int getMaximumVolume() {
-        return maximumVolume;
-    }
-
-    public void setMaximumVolume(int maximumVolume) {
-        this.maximumVolume = maximumVolume;
-    }
 
     //изменение текущей станции в пределах первой - последней радиостанции
     public void numberCurrentStation() {
